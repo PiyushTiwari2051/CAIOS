@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  llm-sandbox:
+    build:
+      context: ./llm-sandbox
+      dockerfile: Dockerfile
+    container_name: caios-llm-sandbox
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      # Constraint 1: Single bind mount to ./sandbox folder only
+      - ./sandbox:/app/sandbox:rw
+    environment:
+      - LLM_PROVIDER=${LLM_PROVIDER:-ollama}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-qwen3:4b}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # Constraint 1: No privileged flag
+    privileged: false
+    # Constraint 1: Strict resource limits (1 Core CPU, 1GB RAM)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+        reservations:
+          memory: 256M
+    mem_limit: 1024m
+    cpus: 1.0
+
+  neo4j-causal-graph:
+    image: neo4j:5.15-community
+    container_name: caios-neo4j-graph
+    restart: unless-stopped
+    ports:
+      - "7474:7474" # HTTP Browser UI
+      - "7687:7687" # Bolt Protocol
+    environment:
+      - NEO4J_AUTH=neo4j/caios_causal_pass
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_memory_pagecache_size=256M
+      - NEO4J_dbms_memory_heap_initial__size=256M
+      - NEO4J_dbms_memory_heap_max__size=512M
+    volumes:
+      - ./data/neo4j/data:/data
+      - ./data/neo4j/logs:/logs
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+    mem_limit: 1024m
+    cpus: 1.0

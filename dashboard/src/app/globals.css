@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    background-color: #f4f0e8 !important;
+    background-image: radial-gradient(#736e65 1.5px, transparent 1.5px) !important;
+    background-size: 32px 32px !important;
+    background-position: 0 0 !important;
+    color: #000000 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+  }
+}
+
+/* Full Dotted Paper Canvas */
+.dot-paper-bg {
+  background-color: #f4f0e8;
+  background-image: radial-gradient(#736e65 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  background-position: 0 0;
+}
+
+/* Neo-Brutalist Card Utilities */
+.neo-card {
+  background-color: #ffffff;
+  border: 2.5px solid #000000;
+  box-shadow: 4px 4px 0px 0px #000000;
+  border-radius: 14px;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neo-card-interactive:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.neo-card-interactive:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #000000;
+}
+
+/* Push Buttons */
+.neo-btn {
+  border: 2px solid #000000;
+  box-shadow: 3px 3px 0px 0px #000000;
+  border-radius: 8px;
+  font-weight: 800;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px #000000;
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #000000;
+}
+
+/* Color Fills */
+.neo-btn-yellow {
+  background-color: #fef08a; /* Yellow */
+}
+.neo-btn-yellow:hover {
+  background-color: #fde047;
+}
+
+.neo-btn-mint {
+  background-color: #bbf7d0; /* Mint */
+}
+.neo-btn-mint:hover {
+  background-color: #86efac;
+}
+
+.neo-btn-cyan {
+  background-color: #bae6fd; /* Cyan */
+}
+.neo-btn-cyan:hover {
+  background-color: #7dd3fc;
+}
+
+.neo-btn-lavender {
+  background-color: #e9d5ff; /* Lavender */
+}
+.neo-btn-lavender:hover {
+  background-color: #d8b4fe;
+}
+
+.neo-btn-rose {
+  background-color: #fecdd3; /* Rose */
+}
+.neo-btn-rose:hover {
+  background-color: #fda4af;
+}
+
+.neo-btn-danger {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+/* Neo Badges */
+.neo-badge {
+  border: 1.5px solid #000000;
+  box-shadow: 1.5px 1.5px 0px 0px #000000;
+  border-radius: 6px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+/* Hazard Warning Stripes for Emergency Kill Switch */
+.hazard-stripes-light {
+  background: repeating-linear-gradient(
+    45deg,
+    #ef4444,
+    #ef4444 12px,
+    #b91c1c 12px,
+    #b91c1c 24px
+  );
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f0e8;
+  border-left: 2px solid #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 0px;
+}
