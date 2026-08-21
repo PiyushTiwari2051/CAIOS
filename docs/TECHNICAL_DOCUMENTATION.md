@@ -34,11 +34,11 @@
 ## 📑 Table of Contents
 1. [Executive Overview & Elevator Pitch](#1-executive-overview--elevator-pitch)
 2. [Problem Statement & The Black-Box Dilemma](#2-problem-statement--the-black-box-dilemma)
-3. [Methodology & Causal Execution Pipeline](#3-methodology--causal-execution-pipeline)
+3. [Methodology & Causal Execution Pipeline (Flowcharts)](#3-methodology--causal-execution-pipeline-flowcharts)
 4. [System Architecture & Request Lifecycle](#4-system-architecture--request-lifecycle)
 5. [Complete Technology Stack](#5-complete-technology-stack)
 6. [Component-Level Technical Documentation](#6-component-level-technical-documentation)
-7. [Safety, Security & Hard Interlock Design](#7-safety-security--hard-interlock-design)
+7. [Safety, Security & Master Kill Switch Interlock](#7-safety-security--master-kill-switch-interlock)
 8. [Live Production UI Showcase & Verification](#8-live-production-ui-showcase--verification)
 9. [Installation, Setup & Deployment Guide](#9-installation-setup--deployment-guide)
 10. [Automated Test Suite & Verification Results](#10-automated-test-suite--verification-results)
@@ -81,15 +81,27 @@ Knowledge workers and software engineers suffer from extreme cognitive fatigue c
 
 ---
 
-## 3. Methodology & Causal Execution Pipeline
+## 3. Methodology & Causal Execution Pipeline (Flowcharts)
 
-CAIOS replaces black-box heuristics with an explicit 4-stage ISO-standard decision pipeline:
+CAIOS structures its decision pipeline through two rigorous representations:
+
+### 3.1. Formal ISO-Standard Causal Decision Flowchart
 
 <div align="center">
 
-![CAIOS Methodology Flowchart](images/caios_formal_flowchart.jpg)
+![CAIOS Formal Methodology Flowchart](images/caios_formal_flowchart.jpg)
 
-*Figure 1: Full CAIOS Causal Pipeline from 1.5s Win32 Telemetry to DoWhy Refutations and Sandboxed Execution.*
+*Figure 1A: Formal ISO decision pipeline from 1.5s Win32 Telemetry to DoWhy Refutations, Kill Switch, and Docker Neo4j Sync.*
+
+</div>
+
+### 3.2. Engineering Blueprint Architecture Pipeline
+
+<div align="center">
+
+![CAIOS Blueprint Architecture Flowchart](images/methodology_flowchart.jpg)
+
+*Figure 1B: Hand-drawn engineering blueprint detailing the 4 core stages of the Causal MAPE control loop.*
 
 </div>
 
@@ -198,7 +210,15 @@ $$\text{ATE} = \mathbb{E}[Y \mid \text{do}(X=1)] - \mathbb{E}[Y \mid \text{do}(X
 
 ---
 
-## 7. Safety, Security & Hard Interlock Design
+## 7. Safety, Security & Master Kill Switch Interlock
+
+<div align="center">
+
+![CAIOS Kill Switch Engaged](images/caios_kill_switch_engaged.png)
+
+*Figure 2: Real-time Master Emergency Kill Switch active in Red Alert state, locking OS execution with `HTTP 423 Locked`.*
+
+</div>
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -229,7 +249,16 @@ $$\text{ATE} = \mathbb{E}[Y \mid \text{do}(X=1)] - \mathbb{E}[Y \mid \text{do}(X
 
 ---
 
-### 2. Causal Directed Acyclic Graph (DAG) Studio
+### 2. Master Emergency Kill Switch (Red Alert Safety Interlock)
+*Hardware-style emergency circuit breaker engaging instant system lock (`HTTP 423 Locked`) across all execution channels.*
+
+![CAIOS Kill Switch Interlock](images/caios_kill_switch_engaged.png)
+
+<br />
+
+---
+
+### 3. Causal Directed Acyclic Graph (DAG) Studio
 *Structural Causal Model (SCM) visualizing Confounders (Lavender), Treatments (Mint), Mediators (Cyan), and Outcomes (Yellow) with directional influence weights.*
 
 ![CAIOS Causal DAG Studio](images/caios_causal_dag_graph.png)
@@ -238,7 +267,7 @@ $$\text{ATE} = \mathbb{E}[Y \mid \text{do}(X=1)] - \mathbb{E}[Y \mid \text{do}(X
 
 ---
 
-### 3. Counterfactual "What-If" Simulator & DoWhy Refutation Ledger
+### 4. Counterfactual "What-If" Simulator & DoWhy Refutation Ledger
 *Interactive slider computing \(\mathbb{E}[Y \mid \text{do}(X = x)]\) in real-time. Demonstrates a **-25.4% reduction in bug rates**, backed by Placebo Treatment ($p=0.002$) and Random Common Cause ($p=0.68$) statistical refutation tests.*
 
 ![CAIOS Counterfactual Simulator](images/caios_counterfactual_refutation.png)
@@ -247,7 +276,7 @@ $$\text{ATE} = \mathbb{E}[Y \mid \text{do}(X=1)] - \mathbb{E}[Y \mid \text{do}(X
 
 ---
 
-### 4. Background Win32 Context Telemetry Sensor
+### 5. Background Win32 Context Telemetry Sensor
 *Zero-overhead background daemon polling active Win32 window handles and process trees every 1.5 seconds with zero keylogging.*
 
 ![CAIOS Live Sensor Terminal](images/caios_live_sensor_terminal.png)
@@ -256,7 +285,7 @@ $$\text{ATE} = \mathbb{E}[Y \mid \text{do}(X=1)] - \mathbb{E}[Y \mid \text{do}(X
 
 ---
 
-### 5. Multi-Domain Enterprise Hub & Docker Neo4j Knowledge Graph
+### 6. Multi-Domain Enterprise Hub & Docker Neo4j Knowledge Graph
 *Universal enterprise scalability across Software Engineering, FinTech Fraud Prevention (-68% Fraud Loss), and Healthcare ER Clinical Triage (-59% 30-Day ICU Readmission). Seamlessly queryable via Cypher on port 7687.*
 
 ![CAIOS Multi-Domain & Neo4j Guide](images/guide_multidomain_neo4j.jpg)
