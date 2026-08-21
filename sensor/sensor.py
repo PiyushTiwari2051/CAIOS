@@ -2,17 +2,27 @@ import time
 import sys
 import os
 from pathlib import Path
+
+# Add sensor directory to sys.path
+SENSOR_DIR = Path(__file__).resolve().parent
+if str(SENSOR_DIR) not in sys.path:
+    sys.path.insert(0, str(SENSOR_DIR))
+
+# Ensure utf-8 standard stream handling on Windows
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 import httpx
 from dotenv import load_dotenv
 
 # Load environment
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = SENSOR_DIR.parent
 load_dotenv(BASE_DIR / ".env")
 
 from window_detector import get_current_active_window
 
 ORCHESTRATOR_URL = os.getenv("ORCHESTRATOR_URL", f"http://127.0.0.1:{os.getenv('PORT_ORCHESTRATOR', '8000')}")
-POLL_INTERVAL_SECONDS = float(os.getenv("SENSOR_POLL_INTERVAL", "3.0"))
+POLL_INTERVAL_SECONDS = float(os.getenv("SENSOR_POLL_INTERVAL", "1.5"))
 
 def run_sensor():
     print("=" * 60)
@@ -33,7 +43,8 @@ def run_sensor():
             
             # Print update if context shifted
             if proc_name != last_process or title != last_title:
-                print(f"\n[Context Shift] Process: {proc_name} | Window: {title[:50]}")
+                clean_title = (title or "")[:50]
+                print(f"\n[Context Shift] Process: {proc_name} | Window: {clean_title}", flush=True)
                 last_process = proc_name
                 last_title = title
 
@@ -52,18 +63,18 @@ def run_sensor():
                     confidence = mode_info.get("confidence", 1.0)
                     is_override = mode_info.get("is_manual_override", False)
                     override_tag = " [MANUAL OVERRIDE]" if is_override else ""
-                    print(f"  └─► Mode: {mode_name} ({confidence*100:.0f}% conf){override_tag}", end="\r")
+                    print(f"  -> Mode: {mode_name} ({confidence*100:.0f}% conf){override_tag}", end="\r", flush=True)
                 else:
-                    print(f"  └─► Orchestrator HTTP Error: {resp.status_code}", end="\r")
+                    print(f"  -> Orchestrator HTTP Error: {resp.status_code}", end="\r", flush=True)
             except httpx.ConnectError:
-                print("  └─► Waiting for CAIOS Orchestrator on localhost...", end="\r")
+                print("  -> Waiting for CAIOS Orchestrator on localhost...", end="\r", flush=True)
             except Exception as e:
-                print(f"  └─► Sync Error: {e}", end="\r")
+                print(f"  -> Sync Error: {e}", end="\r", flush=True)
 
             time.sleep(POLL_INTERVAL_SECONDS)
 
     except KeyboardInterrupt:
-        print("\nCAIOS Context Sensor stopped by user.")
+        print("\nCAIOS Context Sensor stopped by user.", flush=True)
     finally:
         client.close()
 

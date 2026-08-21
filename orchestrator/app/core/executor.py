@@ -16,15 +16,15 @@ from .database import record_action_execution
 
 # Map AllowedApp enums to safe Windows executable launches
 WINDOWS_APP_COMMANDS = {
-    AllowedApp.VSCODE.value: ["cmd.exe", "/c", "code"],
-    AllowedApp.CURSOR.value: ["cmd.exe", "/c", "cursor"],
+    AllowedApp.VSCODE.value: ["cmd.exe", "/c", "start", "code"],
+    AllowedApp.CURSOR.value: ["cmd.exe", "/c", "start", "cursor"],
     AllowedApp.CHROME.value: ["cmd.exe", "/c", "start", "chrome"],
     AllowedApp.EDGE.value: ["cmd.exe", "/c", "start", "msedge"],
     AllowedApp.BROWSER.value: ["cmd.exe", "/c", "start", "msedge"],
-    AllowedApp.NOTEPAD.value: ["notepad.exe"],
+    AllowedApp.NOTEPAD.value: ["cmd.exe", "/c", "start", "notepad"],
     AllowedApp.SPOTIFY.value: ["cmd.exe", "/c", "start", "spotify:"],
-    AllowedApp.TERMINAL.value: ["wt.exe"],
-    AllowedApp.CALCULATOR.value: ["calc.exe"],
+    AllowedApp.TERMINAL.value: ["cmd.exe", "/c", "start", "wt"],
+    AllowedApp.CALCULATOR.value: ["cmd.exe", "/c", "start", "calc"],
     AllowedApp.WORD.value: ["cmd.exe", "/c", "start", "winword"],
     AllowedApp.EXCEL.value: ["cmd.exe", "/c", "start", "excel"],
     AllowedApp.SLACK.value: ["cmd.exe", "/c", "start", "slack:"],
@@ -146,14 +146,19 @@ class ActionExecutor:
         url = action.params.get("url", "").strip()
         timestamp = datetime.utcnow().isoformat() + "Z"
 
-        # Webbrowser open is safe for validated http/https URLs
-        webbrowser.open(url, new=2)
+        try:
+            if sys.platform == "win32":
+                subprocess.Popen(["cmd.exe", "/c", "start", "", url], shell=False)
+            else:
+                webbrowser.open(url, new=2)
+        except Exception:
+            webbrowser.open(url, new=2)
 
         return ActionExecutionResult(
             success=True,
             action_type=action.action_type,
             title=action.title,
-            message=f"Opened verified URL in default browser: {url}",
+            message=f"Opened verified URL: {url}",
             timestamp=timestamp,
             details={"url": url}
         )

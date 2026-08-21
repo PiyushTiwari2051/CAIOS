@@ -54,7 +54,9 @@ export default function Home() {
     }
   }, []);
 
-  // Fetch suggestions when mode shifts
+  const prevModeRef = React.useRef<string | null>(null);
+
+  // Fetch suggestions when mode shifts or prompt is submitted
   const loadSuggestionsForMode = useCallback(
     async (mode: ModeType, prompt?: string) => {
       setIsLoadingSuggestions(true);
@@ -74,20 +76,22 @@ export default function Home() {
         setIsLoadingSuggestions(false);
       }
     },
-    [contextState?.current_context?.window_title, contextState?.current_context?.process_name]
+    []
   );
 
-  // Initial mount polling
+  // Initial mount polling (sync context every 2.5s)
   useEffect(() => {
     loadState();
     const interval = setInterval(loadState, 2500);
     return () => clearInterval(interval);
   }, [loadState]);
 
-  // Sync suggestions whenever mode changes
+  // Sync suggestions ONLY when mode genuinely changes (prevents infinite re-fetching loop)
   useEffect(() => {
-    if (contextState?.current_mode?.mode) {
-      loadSuggestionsForMode(contextState.current_mode.mode);
+    const currentMode = contextState?.current_mode?.mode;
+    if (currentMode && currentMode !== prevModeRef.current) {
+      prevModeRef.current = currentMode;
+      loadSuggestionsForMode(currentMode);
     }
   }, [contextState?.current_mode?.mode, loadSuggestionsForMode]);
 

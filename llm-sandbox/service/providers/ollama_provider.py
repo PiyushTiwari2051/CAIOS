@@ -65,7 +65,7 @@ class OllamaProvider(BaseLLMProvider):
     ) -> Dict[str, Any]:
         prompt = format_user_prompt(mode, user_request, active_window, process_name)
 
-        async with httpx.AsyncClient(timeout=90.0) as client:
+        async with httpx.AsyncClient(timeout=4.0) as client:
             active_model = await self._resolve_active_model(client)
             
             payload = {

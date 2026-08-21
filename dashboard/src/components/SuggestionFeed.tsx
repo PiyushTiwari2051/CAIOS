@@ -62,6 +62,11 @@ export const SuggestionFeed: React.FC<SuggestionFeedProps> = ({
   const handleExecute = async (action: ActionPayload, idx: number) => {
     setExecutingIdx(idx);
     try {
+      // Directly open URL in browser tab on client click
+      if (action.action_type === "OPEN_URL" && action.params?.url) {
+        window.open(action.params.url, "_blank", "noopener,noreferrer");
+      }
+      
       const res = await onExecute(action);
       setFeedback((prev) => ({
         ...prev,
