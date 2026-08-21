@@ -32,41 +32,62 @@
 
 ---
 
-## 🌟 Visual Operating Manual & Architecture Guides
+## 📸 Live Product UI Showcase (Production Views)
 
 <div align="center">
 
-### 1. Adaptive Workspace Shell (Live Telemetry & Execution Ledger)
-*Context-aware Bayesian mode classification (`CODING`, `STUDYING`, `WRITING`, `MEETING`, `IDLE`) with strict allow-listed action cards, instant natural intent adaptation (<180ms), and append-only cryptographic audit logging.*
+### 1. Live Adaptive Workspace Shell
+*Context-aware mode classification (`CODING`, `STUDYING`, `WRITING`, `MEETING`, `IDLE`) with strict allow-listed action cards and synchronous audit logging.*
 
-![CAIOS Workspace Shell Guide](docs/images/guide_workspace_shell.jpg)
-
-<br />
-
----
-
-### 2. Causal Decision Studio (Visual DAG & Structural Causal Models)
-*Directed Acyclic Graph (DAG) grounded in Judea Pearl's Structural Causal Models. Visually maps Confounders (Lavender), Treatment Interventions (Mint), Working Memory Mediators (Cyan), and Business Outcomes (Yellow) with calculated causal influence weights.*
-
-![CAIOS Causal DAG Guide](docs/images/guide_causal_dag.jpg)
+![CAIOS Workspace Shell](docs/images/caios_workspace_shell.png)
 
 <br />
 
 ---
 
-### 3. Counterfactual "What-If" Simulator & Microsoft DoWhy Refutations
-*Interactive intervention slider computing \(\mathbb{E}[Y \mid \text{do}(X = x)]\) in real-time. Demonstrates a **-25.4% reduction in bug rates** and **+33.3% surge in focus velocity**, backed by Placebo Treatment (p=0.002) and Random Common Cause (p=0.68) statistical refutation tests.*
+### 2. Causal Directed Acyclic Graph (DAG) Studio
+*Structural Causal Model (SCM) visualizing Confounders, Treatments, Mediators, and Outcomes with directional influence weights.*
 
-![CAIOS Counterfactual Simulator Guide](docs/images/guide_counterfactual_dowhy.jpg)
+![CAIOS Causal Graph DAG](docs/images/caios_causal_dag_graph.png)
 
 <br />
 
 ---
 
-### 4. Multi-Domain Enterprise Hub & Docker Neo4j Knowledge Graph
-*Universal enterprise scalability across Software Engineering, FinTech Fraud Prevention (-68% Fraud Loss), and Healthcare ER Clinical Triage (-59% 30-Day ICU Readmission). Seamlessly queryable via Cypher on port 7687.*
+### 3. Counterfactual "What-If" Simulator & DoWhy Refutation Ledger
+*Interactive slider simulating \(\mathbb{E}[Y \mid \text{do}(X = x)]\) alongside automated Placebo Treatment and Random Common Cause refutation tests.*
 
-![CAIOS Multi-Domain & Neo4j Guide](docs/images/guide_multidomain_neo4j.jpg)
+![CAIOS Counterfactual Simulator](docs/images/caios_counterfactual_refutation.png)
+
+<br />
+
+---
+
+### 4. Background Win32 Context Telemetry Sensor
+*Zero-overhead background daemon polling active window handles and process trees every 1.5 seconds.*
+
+![CAIOS Live Sensor](docs/images/caios_live_sensor_terminal.png)
+
+</div>
+
+---
+
+## 📖 Visual Operating Manual & Control Guides
+
+<div align="center">
+
+### Step-by-Step Architecture & Dashboard Controls Guide
+*Annotated infographic diagrams explaining every button, sensor, slider, and graph control in CAIOS.*
+
+| 1. Workspace Shell Guide | 2. Causal DAG Studio Guide |
+| :---: | :---: |
+| ![Workspace Shell Guide](docs/images/guide_workspace_shell.jpg) | ![Causal DAG Guide](docs/images/guide_causal_dag.jpg) |
+
+<br />
+
+| 3. Counterfactual & DoWhy Guide | 4. Multi-Domain & Neo4j Guide |
+| :---: | :---: |
+| ![Counterfactual Guide](docs/images/guide_counterfactual_dowhy.jpg) | ![Neo4j Guide](docs/images/guide_multidomain_neo4j.jpg) |
 
 </div>
 
