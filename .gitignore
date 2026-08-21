@@ -38,3 +38,7 @@ yarn-error.log*
 Thumbs.db
 .vscode/
 .idea/
+
+# Presentation decks
+*.pptx
+*.ppt
